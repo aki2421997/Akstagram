@@ -1,0 +1,30 @@
+.box{
+    box-sizing: border-box;
+    padding: 0cm;
+    background-color: whitesmoke;
+    /* box-shadow: 0 0 10px 0 lightgrey; */
+    margin: 15px;
+}
+
+.box__header{
+    line-height: 3;
+    font-size: 1.8rem;
+}
+
+.box__title{
+    font-size: 2em;
+}
+
+.box__text{
+    font-size: 2em;
+}
+
+.box__icon__liked{
+    font-size:2em;
+    color:red;
+}
+
+.box__icon__unliked{
+    font-size:2em;
+    color:grey;
+}

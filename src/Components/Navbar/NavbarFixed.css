@@ -1,0 +1,11 @@
+.outerNav{
+    background-color: white;
+}
+.outerNav__searchBar{
+    width: 30%;
+    font-size: 1.7rem;
+}
+
+.searchBar__button{
+    font-size: 1.7rem;
+}

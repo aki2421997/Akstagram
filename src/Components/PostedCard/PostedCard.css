@@ -1,0 +1,8 @@
+.card--posted{
+    margin-block-start: 45px;
+    margin-block-end: 45px;
+}
+
+.card--posted__caption{
+    font-size: medium;
+}
