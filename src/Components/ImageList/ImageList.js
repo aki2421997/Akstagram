@@ -42,7 +42,7 @@ const ImageList = (props) => {
         <div className='row d-flex justify-content-center list' on> 
             {props.list.map((item) => (
                 // <ImgCap key={item.id} image={item.image} text={item.caption} onImgClick={props.onImgClick} id={item.id} liked={item.liked}/>
-                <PostedCard key={item.id} image={item.image} text={item.caption} onImgClick={props.onImgClick} onImgSave={props.onImgSave} id={item.id} liked={item.liked} save={item.save}/>
+                <PostedCard key={item.id} image={item.image} text={item.caption} onImgClick={props.onImgClick} onImgSave={props.onImgSave} id={item.id} liked={item.liked} save={item.save} ratio={item.ratio}/>
             ))}
         </div>
       </div>

@@ -1,5 +1,5 @@
 export const todo = (state,action) => {
-    console.log(action)
+    console.log(action.ratio)
     switch (action.type) {
         case "ADD_IMG":
             return {
@@ -9,8 +9,7 @@ export const todo = (state,action) => {
                 comment: [],
                 liked: false,
                 save: false,
-                height: action.height,
-                width: action.width
+                ratio: action.ratio
             }
         case "LIKE_IMG":
             if(state.id !== action.id)

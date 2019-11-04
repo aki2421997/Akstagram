@@ -60,7 +60,7 @@ const DialogActions = withStyles(theme => ({
 
 let file = undefined;
 let inputText = "";
-let src1 = "";
+let imgRatio = "";
 const mapStateToProps = (
     state
   ) => {
@@ -77,7 +77,8 @@ const mapStateToProps = (
           type: 'ADD_IMG',
           id:v4(),
           image:file,
-          caption:inputText.value
+          caption:inputText.value,
+          ratio: imgRatio
         });
       }
     };
@@ -102,15 +103,26 @@ const CustomizedDialogs = (props) => {
     }
 
     
-    const onChangeFile = event => {
+    const onChangeFile = (event) => {
         event.stopPropagation();
         event.preventDefault();
         file = URL.createObjectURL(event.target.files[0]);
-        console.log("width==="+file.offsetWidth)
-        return file;
+        var image = document.createElement('img');
+        image.src = file;
+        image.alt="not yet"
+        // image.style.display = "none"
+        image.addEventListener("load",function(){getDimension(this)})
+        // image.ref = "{node => {getDimension(node)}}"
+        // image.onloadeddata = getDimension(this)
+        inputNode.insertAdjacentElement("afterend",image);
     };
 
-    let input = "";
+    function getDimension(element){
+        imgRatio = (element.offsetWidth/element.offsetHeight)*100;
+        console.log(element.offsetHeight+" "+element.offsetWidth +" ratio="+imgRatio)
+    }
+
+    let inputNode = "";
     return (
         <div>
             <FloatingAddButton handleClickOpen={handleClickOpen}/>
@@ -129,7 +141,8 @@ const CustomizedDialogs = (props) => {
                                 className="custom-file-input"
                                 id="customFile"
                                 type="file"
-                                onChange={event => {src1=onChangeFile(event)}}
+                                ref = {node => {inputNode = node}}
+                                onChange={event => {onChangeFile(event)}}
                                 accept="image/*"
                             />
                             <label className="custom-file-label" for="customFile">

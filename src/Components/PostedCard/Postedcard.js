@@ -21,7 +21,7 @@ import BookmarkBorderOutlinedIcon from '@material-ui/icons/BookmarkBorderOutline
 import BookmarkIcon from '@material-ui/icons/Bookmark';
 import './PostedCard.css'
 
-var ratio = "100%";
+// var ratio1 = "100%";
 var useStyles = makeStyles(theme => ({
   root: {
     color:"red"
@@ -40,7 +40,11 @@ var useStyles = makeStyles(theme => ({
   },
   media: {
     height: 0,
-    paddingTop: "100%",
+    // paddingTop: "100%",
+    paddingTop: props =>
+      props.ratio === ''
+        ? '80%'
+        : `${props.ratio}%`,
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -62,19 +66,19 @@ var useStyles = makeStyles(theme => ({
   }
 }));
 
-function handleSize(image) {
-  console.log("image>>>>>>>")
-  if(image!=null){
-    ratio = (image.naturalHeight/image.naturalWidth)*100;
-    console.log(image.naturalWidth, image.naturalHeight,ratio);
-  }
-}
+// function handleSize(image) {
+//   console.log("image>>>>>>>")
+//   if(image!=null){
+//     ratio1 = (image.naturalHeight/image.naturalWidth)*100;
+//     console.log(image.naturalWidth, image.naturalHeight,ratio1);
+//   }
+// }
 
-export default function PostedCard({liked,image,text,onImgClick,id,onImgSave,save}) {
+export default function PostedCard(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
-  
+  console.log(`ratio=${props.ratio}`);
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -95,23 +99,23 @@ export default function PostedCard({liked,image,text,onImgClick,id,onImgSave,sav
         }
         title="Akshay Wanjari"
       />
-      <img src={image} alt="dfd" ref={image => handleSize(image)} style={{display:"none"}}></img>
+      {/* <img src={image} alt="dfd" ref={image => handleSize(image)} style={{display:"none"}}></img> */}
       <CardMedia
         className={classes.media}
-        image={image}
+        image={props.image}
         title="Paella dish"
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          {text}
+          {props.text}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites" onClick={() => onImgClick(id)}>
-            {liked ? <FavoriteIcon className={classes.root}/> : <FavoriteBorderOutlinedIcon />}
+        <IconButton aria-label="add to favorites" onClick={() => props.onImgClick(props.id)}>
+            {props.liked ? <FavoriteIcon className={classes.root}/> : <FavoriteBorderOutlinedIcon />}
         </IconButton>
-        <IconButton aria-label="bookmark" onClick={() => onImgSave(id)}>
-            {save ? <BookmarkIcon className={classes.save}/> : <BookmarkBorderOutlinedIcon />}
+        <IconButton aria-label="bookmark" onClick={() => props.onImgSave(props.id)}>
+            {props.save ? <BookmarkIcon className={classes.save}/> : <BookmarkBorderOutlinedIcon />}
         </IconButton>
         <IconButton
           className={clsx(classes.expand, {
@@ -127,28 +131,6 @@ export default function PostedCard({liked,image,text,onImgClick,id,onImgSave,sav
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>Method:</Typography>
-          <Typography paragraph>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10
-            minutes.
-          </Typography>
-          <Typography paragraph>
-            Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high
-            heat. Add chicken, shrimp and chorizo, and cook, stirring occasionally until lightly
-            browned, 6 to 8 minutes. Transfer shrimp to a large plate and set aside, leaving chicken
-            and chorizo in the pan. Add pimentón, bay leaves, garlic, tomatoes, onion, salt and
-            pepper, and cook, stirring often until thickened and fragrant, about 10 minutes. Add
-            saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
-          </Typography>
-          <Typography paragraph>
-            Add rice and stir very gently to distribute. Top with artichokes and peppers, and cook
-            without stirring, until most of the liquid is absorbed, 15 to 18 minutes. Reduce heat to
-            medium-low, add reserved shrimp and mussels, tucking them down into the rice, and cook
-            again without stirring, until mussels have opened and rice is just tender, 5 to 7
-            minutes more. (Discard any mussels that don’t open.)
-          </Typography>
-          <Typography>
-            Set aside off of the heat to let rest for 10 minutes, and then serve.
-          </Typography>
         </CardContent>
       </Collapse>
       {/* <TextField
