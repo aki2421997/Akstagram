@@ -24,7 +24,7 @@ import './PostedCard.css'
 // var ratio1 = "100%";
 var useStyles = makeStyles(theme => ({
   root: {
-    color:"red"
+    color:"red",
   },
   save: {
     color: "grey"
@@ -36,15 +36,12 @@ var useStyles = makeStyles(theme => ({
     boxSizing: 'border-box'
   },
   card: {
-    maxWidth: 500,
+    maxWidth: 640,
+    borderRadius: 0
   },
   media: {
     height: 0,
-    // paddingTop: "100%",
-    paddingTop: props =>
-      props.ratio === ''
-        ? '80%'
-        : `${props.ratio}%`,
+    paddingTop: props => `${props.ratio}%`
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -75,7 +72,7 @@ var useStyles = makeStyles(theme => ({
 // }
 
 export default function PostedCard(props) {
-  const classes = useStyles();
+  const classes = useStyles(props);
   const [expanded, setExpanded] = React.useState(false);
 
   console.log(`ratio=${props.ratio}`);

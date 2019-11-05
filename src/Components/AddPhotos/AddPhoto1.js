@@ -98,7 +98,7 @@ const CustomizedDialogs = (props) => {
     const handleSave = () => {
         if(file !== undefined)
             props.onClick();
-        // file = undefined;
+        file = undefined;
         setOpen(false);
     }
 
@@ -110,7 +110,7 @@ const CustomizedDialogs = (props) => {
         var image = document.createElement('img');
         image.src = file;
         image.alt="not yet"
-        // image.style.display = "none"
+        image.style.display = "block"
         image.addEventListener("load",function(){getDimension(this)})
         // image.ref = "{node => {getDimension(node)}}"
         // image.onloadeddata = getDimension(this)
@@ -118,7 +118,7 @@ const CustomizedDialogs = (props) => {
     };
 
     function getDimension(element){
-        imgRatio = (element.offsetWidth/element.offsetHeight)*100;
+        imgRatio = (element.offsetHeight/element.offsetWidth)*100;
         console.log(element.offsetHeight+" "+element.offsetWidth +" ratio="+imgRatio)
     }
 
