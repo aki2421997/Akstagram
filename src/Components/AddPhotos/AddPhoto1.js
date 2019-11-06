@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import { v4 } from 'node-uuid';
 import {FloatingAddButton} from '../FlaotingButtons/FloatingButtons'
+import { classes } from "istanbul-lib-coverage";
 
 const styles = theme => ({
     root: {
@@ -56,7 +57,6 @@ const DialogActions = withStyles(theme => ({
         padding: theme.spacing(1)
     }
 }))(MuiDialogActions);
-
 
 let file = undefined;
 let inputText = "";
@@ -104,6 +104,7 @@ const CustomizedDialogs = (props) => {
 
     
     const onChangeFile = (event) => {
+        var height = "";
         event.stopPropagation();
         event.preventDefault();
         file = URL.createObjectURL(event.target.files[0]);
@@ -111,15 +112,21 @@ const CustomizedDialogs = (props) => {
         image.src = file;
         image.alt="not yet"
         image.style.display = "block"
-        image.addEventListener("load",function(){getDimension(this)})
-        // image.ref = "{node => {getDimension(node)}}"
-        // image.onloadeddata = getDimension(this)
-        inputNode.insertAdjacentElement("afterend",image);
+        image.addEventListener("load",function(){
+            height = getDimension(this);
+            console.log(inputText)
+            inputText.style.marginBlockStart= `0.1rem + ${height}px`
+        })
+        image.style.maxWidth = "200px";
+        image.style.maxHeight = "200px";
+        image.style.objectFit = "contain";
+        image.style.marginBlockStart = "0.2rem"
+        inputNode.insertAdjacentElement("beforeBegin",image);
     };
 
     function getDimension(element){
         imgRatio = (element.offsetHeight/element.offsetWidth)*100;
-        console.log(element.offsetHeight+" "+element.offsetWidth +" ratio="+imgRatio)
+        return element.offsetHeight;
     }
 
     let inputNode = "";
@@ -135,13 +142,11 @@ const CustomizedDialogs = (props) => {
                     Image Upload
                 </DialogTitle>
                 <DialogContent dividers>
-                    <Typography gutterBottom>
-                        <div className="custom-file">
+                        <div id="in" className="custom-file">
                             <input
                                 className="custom-file-input"
                                 id="customFile"
                                 type="file"
-                                ref = {node => {inputNode = node}}
                                 onChange={event => {onChangeFile(event)}}
                                 accept="image/*"
                             />
@@ -149,15 +154,14 @@ const CustomizedDialogs = (props) => {
                                 Choose file
                             </label>
                         </div>
-                    </Typography>
-                    <Typography gutterBottom>
-                        <TextareaAutosize
-                            ref = {element => { inputText = element; }}
-                            aria-label="minimum height"
-                            rows={3}
-                            placeholder="Add Caption"
-                        />
-                    </Typography>
+                        <div style={{marginBlockStart:"0.3rem"}} ref = {node => {inputNode = node}}>
+                            <TextareaAutosize
+                                ref = {element => { inputText = element; }}
+                                aria-label="minimum height"
+                                rows={3}
+                                placeholder="Add Caption"
+                            />
+                        </div>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleSave} color="primary">
