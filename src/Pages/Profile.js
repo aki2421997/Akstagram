@@ -6,6 +6,7 @@ import Avatar from '@material-ui/core/Avatar';
 import ImageGridList from '../Components/GridImg/GridImg'
 import CenteredTabs from '../Components/CenteredTabs/CenteredTabs';
 import { Divider } from '@material-ui/core';
+import MyGrid from '../Components/MyGrid/MyGrid';
 
 const useStyles = makeStyles({
   section: {
@@ -52,7 +53,7 @@ const Profile = () => {
                 <CenteredTabs/>
             </Box>
             <Box component="div">
-                <ImageGridList/>
+                <MyGrid/>
             </Box>
         </Box>
     )

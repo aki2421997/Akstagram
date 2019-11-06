@@ -15,9 +15,12 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper,
   },
   gridList: {
-    width: 500,
-    height: 450,
+    width: "100%",
+    height: "100%",
   },
+  gridTile: {
+    // height:"30vw"
+  }
 }));
 
 /**
@@ -65,9 +68,9 @@ function ImageGridList(props) {
 
   return (
     <div className={classes.root}>
-      <GridList cellHeight={160} className={classes.gridList} cols={3}>
+      <GridList cellHeight={250} className={classes.gridList} cols={3}>
         {props.list.map(tile => (
-          <GridListTile key={tile.image} cols={1}>
+          <GridListTile key={tile.image} cols={1} className={classes.gridTile}>
             <img src={tile.image} alt={tile.title} />
           </GridListTile>
         ))}

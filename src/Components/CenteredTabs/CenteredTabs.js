@@ -30,9 +30,9 @@ export default function CenteredTabs() {
         textColor="primary"
         centered
       >
-        <NavLink to='/liked_post'>
+        <NavLink to='/all_post'>
           <Tab 
-            label="Liked" />
+            label="All" />
         </NavLink>
         <NavLink to='/saved_post'>
           <Tab 

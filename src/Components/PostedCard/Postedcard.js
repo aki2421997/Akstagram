@@ -63,14 +63,6 @@ var useStyles = makeStyles(theme => ({
   }
 }));
 
-// function handleSize(image) {
-//   console.log("image>>>>>>>")
-//   if(image!=null){
-//     ratio1 = (image.naturalHeight/image.naturalWidth)*100;
-//     console.log(image.naturalWidth, image.naturalHeight,ratio1);
-//   }
-// }
-
 export default function PostedCard(props) {
   const classes = useStyles(props);
   const [expanded, setExpanded] = React.useState(false);
@@ -96,7 +88,6 @@ export default function PostedCard(props) {
         }
         title="Akshay Wanjari"
       />
-      {/* <img src={image} alt="dfd" ref={image => handleSize(image)} style={{display:"none"}}></img> */}
       <CardMedia
         className={classes.media}
         image={props.image}
